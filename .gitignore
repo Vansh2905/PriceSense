@@ -1,5 +1,4 @@
 venv/
 backend/__pycache__/
-backend/models/*.pkl
 Data/*.csv
 .env
