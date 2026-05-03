@@ -1,86 +1,154 @@
-# PriceSense
+# 🏠 PriceSense – AI-Powered House Price Prediction
 
-PriceSense is a full-stack web application that predicts housing prices based on various features such as location, number of rooms, and median income. It uses a machine learning model trained on housing data and provides an intuitive user interface to interact with the model.
+PriceSense is a full-stack machine learning application that predicts housing prices based on socioeconomic and geographical features. It integrates a trained ML model with a modern web interface to deliver real-time predictions.
 
-## Features
+---
 
-- **Machine Learning Model**: Trained to predict housing prices using features like longitude, latitude, housing median age, total rooms, and more.
-- **Backend API**: A robust REST API built with FastAPI to serve the machine learning model.
-- **Frontend Web App**: A modern, responsive user interface built with Next.js and React for easy interaction with the prediction model.
+## 🎯 Objective
 
-## Project Structure
+Designed and developed as a hands-on project to strengthen practical machine learning skills by implementing an end-to-end pipeline, including data preprocessing, feature engineering, model selection, evaluation, and deployment.
 
-- `backend/`: Contains the FastAPI application, the pre-trained machine learning models (`.pkl` files), and API endpoints for predictions.
-- `frontend/`: Contains the Next.js web application for the user interface.
-- `main.ipynb`: Jupyter notebook containing the data exploration, feature engineering, and model training code.
-- `Data/`: Directory containing the datasets used for training the model.
+---
 
-## Tech Stack
+## 🚀 Key Features
 
-### Backend
-- **Python**
-- **FastAPI**: For building the REST API.
-- **Scikit-learn**: For machine learning model training and inference.
-- **Pandas & NumPy**: For data manipulation.
-- **Joblib**: For model serialization.
+* 🤖 **Machine Learning Model**
+  Predicts house prices using location, income, and housing-related features
 
-### Frontend
-- **Next.js**: React framework for the user interface.
-- **React**: UI library.
-- **TypeScript**: Typed superset of JavaScript.
+* ⚡ **FastAPI Backend**
+  High-performance REST API for serving predictions
 
-## Getting Started
+* 🌐 **Modern Frontend (Next.js + React)**
+  Clean and responsive user interface
 
-### Prerequisites
-- Node.js (v18 or higher recommended)
-- Python 3.8+
+* 📊 **End-to-End ML Pipeline**
+  Covers preprocessing → feature engineering → training → deployment
 
-### Running the Backend
+---
 
-1. Navigate to the `backend` directory:
-   ```bash
-   cd backend
-   ```
-2. Create and activate a virtual environment (optional but recommended):
-   ```bash
-   python -m venv venv
-   # On Windows:
-   venv\Scripts\activate
-   # On macOS/Linux:
-   source venv/bin/activate
-   ```
-3. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Start the FastAPI server:
-   ```bash
-   uvicorn main:app --reload
-   ```
-   The backend API will be available at `http://localhost:8000`.
+## 🧠 Machine Learning Highlights
 
-### Running the Frontend
+* Handled missing values using **median imputation**
+* Applied **One-Hot Encoding** for categorical features
+* Performed domain-driven **feature engineering**:
 
-1. Navigate to the `frontend` directory:
-   ```bash
-   cd frontend
-   ```
-2. Install the dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the Next.js development server:
-   ```bash
-   npm run dev
-   ```
-   The frontend will be available at `http://localhost:3000`.
+  * rooms_per_household
+  * bedrooms_per_room
+  * population_per_household
+* Used **Stratified Sampling** to maintain data distribution
+* Compared multiple regression models:
 
-## API Endpoints
+  * Linear Regression
+  * Decision Tree
+  * Random Forest (**Best Model**)
 
-### `POST /predict`
-Accepts housing features and returns the predicted price.
+### 📈 Performance
 
-**Request Body Example:**
+* **RMSE:** ~48,433
+* **R² Score:** 0.81
+
+---
+
+## 🌐 Live Demo
+
+* 🔗 **Frontend:** https://pricesense-eta.vercel.app/
+* 🔗 **Backend API:** https://pricesense-srqi.onrender.com
+
+---
+
+## 🏗️ Project Structure
+
+```bash
+PriceSense/
+│
+├── backend/                     # FastAPI backend service
+│   ├── models/                  # Serialized ML models
+│   │   ├── PriceSense.pkl       # Preprocessing pipeline
+│   │   └── model.pkl            # Trained Random Forest model
+│   ├── main.py                  # API endpoints (FastAPI app)
+│   └── requirements.txt         # Backend dependencies
+│
+├── frontend/                    # Next.js frontend application
+│   ├── public/                  # Static assets
+│   ├── src/
+│   │   └── app/                 # App Router (Next.js 13+)
+│   │       ├── layout.tsx       # Root layout
+│   │       ├── page.tsx         # Main UI page
+│   │       ├── page.module.css  # Page-specific styles
+│   │       ├── globals.css      # Global styles
+│   │       └── favicon.ico
+│   ├── .env                     # Environment variables
+│   ├── package.json             # Dependencies & scripts
+│   ├── tsconfig.json            # TypeScript config
+│   └── README.md                # Frontend documentation
+│
+├── Data/                        # Dataset directory
+├── main.ipynb                   # ML training & experimentation
+│
+├── requirements.txt             # Root-level Python dependencies
+├── .gitignore                   # Git ignore rules
+└── README.md                    # Main project documentation
+```
+
+---
+
+## ⚙️ Tech Stack
+
+### 🔧 Backend
+
+* Python
+* FastAPI
+* Scikit-learn
+* Pandas, NumPy
+* Joblib
+
+### 🎨 Frontend
+
+* Next.js
+* React
+* TypeScript
+
+---
+
+## ▶️ Getting Started
+
+### 📌 Prerequisites
+
+* Node.js (v18+)
+* Python 3.8+
+
+---
+
+### 🚀 Run Backend
+
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate   # Windows
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+---
+
+### 🌐 Run Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+## 🔌 API Endpoints
+
+### 🔹 POST `/predict`
+
+Predict house price based on input features
+
+#### Request Example:
+
 ```json
 {
   "longitude": -122.23,
@@ -95,7 +163,8 @@ Accepts housing features and returns the predicted price.
 }
 ```
 
-**Response Example:**
+#### Response:
+
 ```json
 {
   "predicted_price": 452600.0,
@@ -103,14 +172,46 @@ Accepts housing features and returns the predicted price.
 }
 ```
 
-### `GET /`
-Health check endpoint to verify the API is running.
+---
 
-## Model Training
+### 🔹 GET `/`
 
-The machine learning model is trained in the `main.ipynb` notebook. The pipeline handles:
-- Feature engineering (e.g., calculating rooms per household).
-- Scaling numeric features.
-- One-hot encoding for categorical features like `ocean_proximity`.
+Health check endpoint
 
-The final trained model and pipeline are exported as `.pkl` files and stored in the `backend/models/` directory for inference.
+---
+
+## 🧪 Model Training
+
+The model is trained in `main.ipynb` and includes:
+
+* Data cleaning & preprocessing
+* Feature engineering
+* Scaling & encoding pipeline
+* Model training & evaluation
+
+The final trained model is exported as `.pkl` files and used for backend inference.
+
+---
+
+## 🚀 Future Improvements
+
+* Hyperparameter tuning (GridSearchCV / RandomizedSearchCV)
+* Experiment with Gradient Boosting (XGBoost, LightGBM)
+* Enhance UI/UX
+* Add authentication & input validation
+
+---
+
+## 💡 Key Learnings
+
+* Handling real-world datasets
+* Impact of feature engineering on performance
+* Avoiding data leakage
+* Model comparison & evaluation
+* Building and deploying full-stack ML applications
+
+---
+
+## 👨‍💻 Author
+
+**Vansh Ahluwalia**
