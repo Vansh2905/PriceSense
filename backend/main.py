@@ -12,14 +12,14 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Define paths relative to this script
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "models", "model.pkl")
+MODEL_PATH = os.path.join(BASE_DIR, "models", "xgb_model.pkl")
 PIPELINE_PATH = os.path.join(BASE_DIR, "models", "PriceSense.pkl")
 
 # Load models
