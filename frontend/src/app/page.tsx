@@ -1,9 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 
 export default function Home() {
+  // Warm up the backend API on load (useful for Render free tier cold starts)
+  useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+    fetch(`${apiUrl}/`).catch(() => {}); // Fire and forget
+  }, []);
+
   const [formData, setFormData] = useState({
     longitude: '-122.23',
     latitude: '37.88',
